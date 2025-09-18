@@ -61,7 +61,7 @@ export default function ProjectPage() {
     try {
       setLoading(true);
 
-      const res = await fetch(`https://solvrithm-user-backend.onrender.com/projects/${id}/add-student`, {
+      const res = await fetch(`https://solvrithm-admin-backend.onrender.com/projects/${id}/add-student`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -94,7 +94,7 @@ export default function ProjectPage() {
   //   try {
   //     setLoading(true)
   //     setError(null)
-  //     const res = await fetch(`https://solvrithm-user-backend.onrender.com/projects/${id}`, {
+  //     const res = await fetch(`https://solvrithm-admin-backend.onrender.com/projects/${id}`, {
   //       method: 'DELETE',
   //       headers: { 'Content-Type': 'application/json' },
   //     })
@@ -119,7 +119,7 @@ export default function ProjectPage() {
         try {
           setLoading(true)
           setError(null)
-          const res = await fetch(`https://solvrithm-user-backend.onrender.com/projects/${id}`, {
+          const res = await fetch(`https://solvrithm-admin-backend.onrender.com/projects/${id}`, {
             signal: ctrl.signal,
             headers: { 'Content-Type': 'application/json' },
             cache: 'no-store',
