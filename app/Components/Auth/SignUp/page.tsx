@@ -45,7 +45,7 @@ export default function page() {
     setIsLoading(true)
 
     try {
-      const response = await fetch(`https://solvrithm-admin-backend.onrender.com/signup`, {
+      const response = await fetch(`https://solvrithm-user-backend.onrender.com/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

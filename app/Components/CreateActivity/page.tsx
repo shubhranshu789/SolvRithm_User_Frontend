@@ -27,7 +27,7 @@ interface UploadProjectFormProps {
   apiEndpoint?: string
 }
 
-export default function UploadProjectForm({ onSuccess, apiEndpoint = `https://solvrithm-admin-backend.onrender.com/projects` }: UploadProjectFormProps) {
+export default function UploadProjectForm({ onSuccess, apiEndpoint = `https://solvrithm-user-backend.onrender.com/projects` }: UploadProjectFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
 

@@ -55,7 +55,7 @@ export default function Page() {
                 const parsed = JSON.parse(userData); // {_id: "..."}
                 const studentId = parsed._id;
 
-                const res = await fetch(`https://solvrithm-admin-backend.onrender.com/students/${studentId}/projects`);
+                const res = await fetch(`https://solvrithm-user-backend.onrender.com/students/${studentId}/projects`);
                 if (!res.ok) {
                     throw new Error("Failed to fetch projects");
                 }
@@ -82,7 +82,7 @@ export default function Page() {
                 const parsed = JSON.parse(userData); // {_id: "..."}
                 const studentId = parsed._id;
 
-                const res = await fetch(`https://solvrithm-admin-backend.onrender.com/students/${studentId}`);
+                const res = await fetch(`https://solvrithm-user-backend.onrender.com/students/${studentId}`);
                 if (!res.ok) {
                     throw new Error("Failed to fetch student details");
                 }
