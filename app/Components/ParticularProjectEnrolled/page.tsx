@@ -303,7 +303,7 @@ export default function ProjectPage() {
                                     </div>
 
 
-                                    <div style={{marginBottom : "20px"}} className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-5 shadow-lg w-full max-w-md">
+                                    {/* <div style={{marginBottom : "20px"}} className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-5 shadow-lg w-full max-w-md">
                                         <h2 className="text-lg font-semibold text-white mb-3">Approval Status</h2>
 
                                         {loading ? (
@@ -326,7 +326,7 @@ export default function ProjectPage() {
                                                 )}
                                             </div>
                                         )}
-                                    </div>
+                                    </div> */}
 
 
 

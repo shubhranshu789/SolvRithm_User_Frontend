@@ -11,15 +11,31 @@ import { Eye, EyeOff, Mail, Lock, User } from "lucide-react"
 
 import { useRouter } from "next/navigation"
 
+import { indiaStatesCities } from "./indiaStatesCities";
+
 export default function page() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [name, setname] = useState("")
+
+
+  const [phone, setphone] = useState("")
+  const [pincode, setpincode] = useState("")
+  const [city, setcity] = useState("")
+  const [state, setstate] = useState("")
+
+
+  const [selectedState, setSelectedState] = useState<string>("");
+  const [cities, setCities] = useState<string[]>([]);
+  const [selectedCity, setSelectedCity] = useState<string>("");
+
   const [uniRoll, setuniRoll] = useState("")
   const [member1, setmember1] = useState("")
   const [member2, setmember2] = useState("")
   const [member3, setmember3] = useState("")
   const [member4, setmember4] = useState("")
+
+
 
 
 
@@ -35,22 +51,39 @@ export default function page() {
     router.push("/Components/Auth/SignIn")
   }
 
-  const chk  = () => {
-    console.log(name , uniRoll , member1 , member2 , member3 , member4);
-    
+  const chk = () => {
+    console.log(name, uniRoll, member1, member2, member3, member4);
+
   }
+
+
+  const handleStateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selected = e.target.value;
+    setstate(selected);
+
+    const stateData = indiaStatesCities.find(s => s.state === selected);
+    setCities(stateData ? stateData.cities : []);
+    setcity(""); // reset city when state changes
+  };
+
+  const handleCityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setcity(e.target.value);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
 
+
+    // http://localhost:3000/Components/Auth/SignUp
     try {
       const response = await fetch(`https://solvrithm-user-backend.onrender.com/signup`, {
+      // const response = await fetch(`http://localhost:5000/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password , name , uniRoll , member1 , member2 , member3 , member4 }),
+        body: JSON.stringify({ email, password, name, uniRoll, member1, member2, member3, member4 , phone , pincode , city , state}),
       })
 
       const data = await response.json()
@@ -168,7 +201,88 @@ export default function page() {
               </div>
 
 
+              {/* ----------------------------------------------------------------------------------------------------------- */}
+              <div className="space-y-2">
+                <Label htmlFor="phone" className="text-sm font-medium">
+                  Phone Number
+                </Label>
+                <div className="relative">
+                  {/* <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" /> */}
+                  <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="phone"
+                    type="phone"
+                    placeholder="Enter the phone number"
+                    value={phone}
+                    onChange={(e) => setphone(e.target.value)}
+                    className="pl-10 bg-input border-border focus:ring-2 focus:ring-ring focus:border-transparent"
+                    required
+                  />
+                </div>
+              </div>
 
+
+
+              <div style={{ maxWidth: "400px", margin: "20px auto" }}>
+                <label>
+                  State:{" "}
+                  <select value={state} onChange={handleStateChange}>
+                    <option value="">Select State</option>
+                    {indiaStatesCities.map((s) => (
+                      <option key={s.state} value={s.state}>
+                        {s.state}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+
+                <br /><br />
+
+                <label>
+                  City:{" "}
+                  <select value={city} onChange={handleCityChange} disabled={!state}>
+                    <option value="">Select City</option>
+                    {cities.map((c) => (
+                      <option key={c} value={c}>
+                        {c}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+
+                <br /><br />
+
+                {/* <div>
+                  <strong>Selected State:</strong> {state || "None"} <br />
+                  <strong>Selected City:</strong> {city || "None"}
+                </div> */}
+              </div>
+
+
+
+              <div className="space-y-2">
+                <Label htmlFor="pincode" className="text-sm font-medium">
+                  Pincode
+                </Label>
+                <div className="relative">
+                  {/* <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" /> */}
+                  <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="pincode"
+                    type="pincode"
+                    placeholder="Enter the pincode"
+                    value={pincode}
+                    onChange={(e) => setpincode(e.target.value)}
+                    className="pl-10 bg-input border-border focus:ring-2 focus:ring-ring focus:border-transparent"
+                    required
+                  />
+                </div>
+              </div>
+
+
+
+
+              {/* ----------------------------------------------------------------------------------------------------------- */}
 
 
 
@@ -212,7 +326,7 @@ export default function page() {
                     value={member2}
                     onChange={(e) => setmember2(e.target.value)}
                     className="pl-10 bg-input border-border focus:ring-2 focus:ring-ring focus:border-transparent"
-                    // required
+                  // required
                   />
                 </div>
               </div>
@@ -232,7 +346,7 @@ export default function page() {
                     value={member3}
                     onChange={(e) => setmember3(e.target.value)}
                     className="pl-10 bg-input border-border focus:ring-2 focus:ring-ring focus:border-transparent"
-                    // required
+                  // required
                   />
                 </div>
               </div>
@@ -252,7 +366,7 @@ export default function page() {
                     value={member4}
                     onChange={(e) => setmember4(e.target.value)}
                     className="pl-10 bg-input border-border focus:ring-2 focus:ring-ring focus:border-transparent"
-                    // required
+                  // required
                   />
                 </div>
               </div>
