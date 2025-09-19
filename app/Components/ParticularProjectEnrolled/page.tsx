@@ -33,12 +33,36 @@ export default function ProjectPage() {
 
 
 
-    const router = useRouter()
+    const router = useRouter();
 
     const [studentId, setStudentId] = useState<string | null>(null);
     const [githubLink, setGithubLink] = useState("");
     const [message, setMessage] = useState("");
     const [alreadyUploaded, setAlreadyUploaded] = useState(false);
+
+    const [status, setStatus] = useState<{ githubLink: string; approved: boolean } | null>(null);
+
+    useEffect(() => {
+        const fetchStatus = async () => {
+            try {
+                setLoading(true);
+                const res = await fetch(`http://localhost:5000/projects/${id}/student-status/${studentId}`);
+                if (!res.ok) throw new Error("Failed to fetch status");
+                const data = await res.json();
+                setStatus(data);
+            } catch (err) {
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchStatus();
+    }, [id, studentId]);
+
+    // if (loading) return <p>Loading status...</p>;
+
+    // if (!status) return <p>No GitHub link uploaded yet.</p>;
 
     // ✅ Get studentId from localStorage
     useEffect(() => {
@@ -278,6 +302,36 @@ export default function ProjectPage() {
                                         </span>
                                     </div>
 
+
+                                    <div style={{marginBottom : "20px"}} className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-5 shadow-lg w-full max-w-md">
+                                        <h2 className="text-lg font-semibold text-white mb-3">Approval Status</h2>
+
+                                        {loading ? (
+                                            <p className="text-gray-300 animate-pulse">Checking status...</p>
+                                        ) : (
+                                            <div
+                                                className={`flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-medium shadow-md w-fit mx-auto ${status?.approved
+                                                        ? "bg-green-500/20 text-green-300 border border-green-400/40"
+                                                        : "bg-red-500/20 text-red-300 border border-red-400/40"
+                                                    }`}
+                                            >
+                                                {status?.approved ? (
+                                                    <>
+                                                        <span className="text-lg">✅</span> Approved
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <span className="text-lg">❌</span> Not Approved
+                                                    </>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+
+
+
+
+
                                     <h1
                                         id="project-title"
                                         className="text-2xl font-semibold tracking-tight text-white md:text-3xl"
@@ -385,8 +439,8 @@ export default function ProjectPage() {
                                     </div>
 
                                     <div className="mt-6 flex flex-wrap gap-3">
-                                        <h3 style={{marginTop : "40px"}} className="text-2xl font-semibold tracking-tight text-white md:text-3xl">GitHub Link</h3>
-                                        <div style={{marginBottom : "20px"}} className="mt-6 flex flex-wrap gap-3">
+                                        <h3 style={{ marginTop: "40px" }} className="text-2xl font-semibold tracking-tight text-white md:text-3xl">GitHub Link</h3>
+                                        <div style={{ marginBottom: "20px" }} className="mt-6 flex flex-wrap gap-3">
                                             <input
                                                 type="url"
                                                 placeholder="Enter your GitHub repo link"
@@ -435,7 +489,7 @@ export default function ProjectPage() {
                                             </a>
                                         ) : (
                                             <div className="mt-2">
-                                                <input
+                                                {/* <input
                                                     type="text"
                                                     value={githubLink}
                                                     onChange={(e) => setGithubLink(e.target.value)}
@@ -447,7 +501,7 @@ export default function ProjectPage() {
                                                     className="mt-2 bg-blue-600 text-white px-4 py-2 rounded"
                                                 >
                                                     Upload GitHub Link
-                                                </button>
+                                                </button> */}
                                             </div>
                                         )}
                                     </div>
