@@ -179,25 +179,25 @@ export default function SolvrithmLanding() {
 
   const companies = [
     {
-      name: "KIBOTIX",
+      name: "IBOTIX",
       prizes: { first: "₹15,000", second: "₹10,000", third: "₹5,000" },
       description: "Leading robotics and automation solutions provider",
       color: "from-red-500 to-pink-500",
-      pic: "11.jpg"
+      pic: "33.jpg"
     },
     {
       name: "Appinfoedge",
       prizes: { first: "₹15,000", second: "₹10,000", third: "₹5,000" },
       description: "Innovative mobile and web application development",
       color: "from-blue-500 to-cyan-500",
-      pic: "22.jpg"
+      pic: "11.jpg"
     },
     {
       name: "30 Days Technologies",
       prizes: { first: "₹11,000", second: "₹5,100", third: "₹2,100" },
       description: "Rapid prototyping and technology consulting",
       color: "from-green-500 to-emerald-500",
-      pic: "33.jpg"
+      pic: "22.jpg"
     },
   ]
 
@@ -306,7 +306,7 @@ export default function SolvrithmLanding() {
           <div className="flex flex-wrap justify-center gap-4 text-sm">
             <Badge variant="secondary" className="flex items-center gap-2">
               <Users className="w-4 h-4" />
-              Open to All Students
+              Open for All the Students
             </Badge>
             <Badge variant="secondary" className="flex items-center gap-2">
               <Calendar className="w-4 h-4" />
@@ -405,15 +405,15 @@ export default function SolvrithmLanding() {
             <ul className="space-y-2 text-gray-200">
               <li className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-yellow-400 rounded-full" />
-                Dr. Ankit Verma
+                Dr. Ankit Verma    <span style={{marginLeft : "10px"}}>+91(9873137958)</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-yellow-400 rounded-full" />
-                Dr. Vipin Kumar
+                Dr. Vipin Kumar    <span style={{marginLeft : "10px"}}>+91(9758441695)</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-yellow-400 rounded-full" />
-                Ms. Mahima Tayal
+                Ms. Mahima Tayal    <span style={{marginLeft : "10px"}}>+91(9718010401)</span>
               </li>
             </ul>
           </div>
