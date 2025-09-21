@@ -5,7 +5,7 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Solvrith',
+  title: 'SOLVRITHM',
   description: '',
   generator: '',
   icons: {
